@@ -1,0 +1,30 @@
+#!/bin/bash
+
+while :
+do
+
+  clear
+
+  echo "  1 - Set device Ruby"
+  echo "  2 - Set device Shooter"
+  echo "  3 - Set device TF101"
+  echo "  4 - Set device P930"
+  echo "  x - Go back"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) export DEVICE=ruby;;
+      2) export DEVICE=shooter;;
+      3) export DEVICE=tf101;;
+      4) export DEVICE=p930$;;
+      x) ~/scripts/cm_script;;
+#      *) echo "Invalid option"; continue;;
+    esac
+  fi
+
+done

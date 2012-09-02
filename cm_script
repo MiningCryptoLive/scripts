@@ -1,0 +1,47 @@
+#!/bin/bash
+
+if [ ! -e cm_script ]
+then
+ echo Run From ~/scripts.
+fi
+
+while :
+do
+
+  clear
+
+  echo "  1 - Build CM9 for $DEVICE"
+  echo "  2 - Build CM10 for $DEVICE"
+  echo "  3 - Build AOKP for $DEVICE"
+  echo "  4 - Clean CyanogenMod 9"
+  echo "  5 - Clean CyanogenMod 10"
+  echo "  6 - Clean AOKP"
+  echo "  7 - Update CyanogenMod 9"
+  echo "  8 - Update CyanogenMod 10"
+  echo "  9 - Update AOKP"
+  echo " 10 - Set Device"
+  echo "  x - Exit"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) cd ~/ics; .  build/envsetup.sh; lunch cm_$DEVICE; make clobber; brunch $DEVICE -j16 > ~/ics/build-`date +%Y%m%d`.txt; cp ~/ics/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/ics/*.txt ~/Desktop; cd ~/scripts;;
+      2) cd ~/cm10; . build/envsetup.sh; make clobber; brunch $DEVICE -j16 > ~/cm10/build-`date +%Y%m%d`.txt; cp ~/cm10/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/cm10/*.txt ~/Desktop && rm ~/cm10/build.txt; cd ~/scripts;;
+      3) cd ~/AOKP; .  build/envsetup.sh; lunch aokp_$DEVICE; make clobber; brunch $DEVICE -j16 > ~/AOKP/build-`date +%Y%m%d`.txt; cp ~/AOKP/out/target/product/ruby/*.zip ~/Desktop; cp ~/AOKP/*.txt ~/Desktop && rm ~/AOKP/build.txt; cd ~/scripts;;
+      4) cd ~/ics; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      5) cd ~/cm10; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      6) cd ~/AOKP; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      7) cd ~/ics; repo sync -j16; cd ~/scripts;;
+      8) cd ~/cm10; repo sync -j16; cd ~/scripts;;
+      9) cd ~/AOKP; repo sync -j16; cd ~/scripts;;
+      10) ~/scripts/device;;
+      x) exit;;
+#      *) echo "Invalid option"; continue;;
+    esac
+  fi
+
+done
