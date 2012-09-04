@@ -35,7 +35,7 @@ do
   then
     case $opt in
       1) cd ~/ics; .  build/envsetup.sh; lunch cm_$DEVICE; make clobber; brunch $DEVICE -j$JOB > ~/ics/build-`date +%Y%m%d`.txt; cp ~/ics/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/ics/*.txt ~/Desktop; cd ~/scripts;;
-      2) cd ~/cm10; . build/envsetup.sh; make clobber; brunch $DEVICE -j$JOB > ~/cm10/build-`date +%Y%m%d`.txt; cp ~/cm10/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/cm10/*.txt ~/Desktop && rm ~/cm10/build.txt; cd ~/scripts;;
+      2) cd ~/cm10; . build/envsetup.sh; make clobber; brunch $DEVICE -j$JOB > ~/cm10/build-`date +%Y%m%d`.txt; cp ~/cm10/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/cm10/*.txt ~/Desktop && cd ~/scripts;;
       3) cd ~/AOKP; .  build/envsetup.sh; lunch aokp_$DEVICE; make clobber; brunch $DEVICE -j$JOB > ~/AOKP/build-`date +%Y%m%d`.txt; cp ~/AOKP/out/target/product/ruby/*.zip ~/Desktop; cp ~/AOKP/*.txt ~/Desktop && rm ~/AOKP/build.txt; cd ~/scripts;;
       4) cd ~/ics; .  build/envsetup.sh; make clobber; cd ~/scripts;;
       5) cd ~/cm10; .  build/envsetup.sh; make clobber; cd ~/scripts;;
