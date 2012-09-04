@@ -1,0 +1,33 @@
+#!/bin/bash
+
+while :
+do
+
+  clear
+
+  echo "  1 - Build AOKP ICS for $DEVICE"
+  echo "  2 - Clean AOKP ICS"
+  echo "  3 - Update AOKP ICS Source"
+  echo "  4 - DL Sport's AOKP ICS tree for Ruby"
+  echo "  5 - Downlaod AOKP ICS Source"
+  echo "  6 - Update Sport's AOKP ICS Tree"
+  echo "  x - Exit"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) cd ~/aokp_ics; . build/envsetup.sh; brunch $DEVICE -j$JOB > ~/aokp_ics/build-`date +%Y%m%d`.txt; cp ~/aokp_ics/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/aokp_ics/*.txt ~/Desktop && cd ~/scripts;;
+      2) cd ~/aokp_ics; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      3) cd ~/aokp_ics; repo sync -j$REPO; cd ~/scripts;;
+      4) echo sorry does not exist..... yet;;
+      5) cd ~/ && mkdir aokp_ics && cd ~/aokp_ics && repo init -u https://github.com/AOKP/platform_manifest.git -b ics && repo sync -j$REPO;;
+      6)  echo sorry does not exist..... yet;;
+      x) exit;;
+    esac
+  fi
+
+done

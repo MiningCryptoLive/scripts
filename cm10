@@ -1,0 +1,33 @@
+#!/bin/bash
+
+while :
+do
+
+  clear
+
+  echo "  1 - Build CM10 for $DEVICE"
+  echo "  2 - Clean CM10"
+  echo "  3 - Update CM10 Source"
+  echo "  4 - DL Sport's CM10 tree for Ruby"
+  echo "  5 - Downlaod CM10 Source"
+  echo "  6 - Update Sport's CM10 Tree"
+  echo "  x - Exit"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) cd ~/cm10; . build/envsetup.sh; brunch $DEVICE -j$JOB > ~/cm10/build-`date +%Y%m%d`.txt; cp ~/cm10/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/cm10/*.txt ~/Desktop && cd ~/scripts;;
+      2) cd ~/cm10; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      3) cd ~/cm10; repo sync -j$REPO; cd ~/scripts;;
+      4) cd ~/cm10/device && mkdir htc && cd htc; git clone git://github.com/CM-Ruby/android_device_htc_ruby.git -b jellybean ruby; cd ~/cm10/vendor && mkdir htc && cd htc && git clone git://github.com/CM-Ruby/proprietary_vendor_htc_ruby.git -b jellybean ruby; cd ~/scripts;;
+      5) cd ~/ && mkdir cm10; cd ~/cm10; repo init -u git://github.com/CyanogenMod/android.git -b jellybean; repo sync -j$REPO;;
+      6) cd ~/cm10/device/htc/ruby && git pull; cd ~/cm10/vendor/htc/ruby && git pull; cd ~/scripts;;
+      x) exit;;
+    esac
+  fi
+
+done

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+while :
+do
+
+  clear
+
+  echo "  1 - Build CM9 for $DEVICE"
+  echo "  2 - Clean CM9"
+  echo "  3 - Update CM9 Source"
+  echo "  4 - DL Sport's CM9 tree for Ruby"
+  echo "  5 - Downlaod CM9 Source"
+  echo "  6 - Update Sport's CM9 Tree"
+  echo "  x - Exit"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) cd ~/ics; .  build/envsetup.sh; brunch $DEVICE -j$JOB > ~/ics/build-`date +%Y%m%d`.txt; cp ~/ics/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/ics/*.txt ~/Desktop; cd ~/scripts;;
+      2) cd ~/ics; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      3) cd ~/ics; repo sync -j$REPO; cd ~/scripts;;
+      4) cd ~/ics/device && mkdir htc && cd htc; git clone git://github.com/Sportsstar89/android_device_htc_ruby.git -b ics ruby; cd ~/ics/vendor && mkdir htc && cd htc && git clone git://github.com/Sportsstar89/proprietary_vendor_htc_ruby.git -b ics ruby; cd ~/scripts;;
+      5) cd ~/ && mkdir ics; cd ~/ics; repo init -u git://github.com/CyanogenMod/android.git -b ics; repo sync -j$REPO;;
+      6) cd ~/ics/device/htc/ruby && git pull; cd ~/ics/vendor/htc/ruby && git pull; cd ~/scripts;;
+      x) exit;;
+    esac
+  fi
+
+done

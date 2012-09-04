@@ -1,0 +1,33 @@
+#!/bin/bash
+
+while :
+do
+
+  clear
+
+  echo "  1 - Build AOKP JB for $DEVICE"
+  echo "  2 - Clean AOKP JB"
+  echo "  3 - Update AOKP JB Source"
+  echo "  4 - DL Sport's AOKP JB tree for Ruby"
+  echo "  5 - Downlaod AOKP JB Source"
+  echo "  6 - Update Sport's AOKP JB Tree"
+  echo "  x - Exit"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) cd ~/AOKP; . build/envsetup.sh; brunch $DEVICE -j$JOB > ~/AOKP/build-`date +%Y%m%d`.txt; cp ~/AOKP/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/AOKP/*.txt ~/Desktop && cd ~/scripts;;
+      2) cd ~/AOKP; .  build/envsetup.sh; make clobber; cd ~/scripts;;
+      3) cd ~/AOKP; repo sync -j$REPO; cd ~/scripts;;
+      4) echo sorry does not exist..... yet;;
+      5) cd ~/ && mkdir AOKP && cd ~/AOKP && repo init -u https://github.com/AOKP/platform_manifest.git -b jb && repo sync -j$REPO;;
+      6)  echo sorry does not exist..... yet;;
+      x) exit;;
+    esac
+  fi
+
+done

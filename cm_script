@@ -9,22 +9,19 @@ while :
 do
 
   clear
+  echo    Amount Of Processors = $JOB
+  echo    Network Strength = $REPO
+  echo    Device Name = $DEVICE
 
-  echo "  1 - Build CM9 for $DEVICE"
-  echo "  2 - Build CM10 for $DEVICE"
-  echo "  3 - Build AOKP for $DEVICE"
-  echo "  4 - Clean CyanogenMod 9"
-  echo "  5 - Clean CyanogenMod 10"
-  echo "  6 - Clean AOKP"
-  echo "  7 - Update CyanogenMod 9"
-  echo "  8 - Update CyanogenMod 10"
-  echo "  9 - Update AOKP"
-  echo " 10 - Set Device"
-  echo " 11 - Set number of processors"
-  echo " 12 - Install Necessary packages"
-  echo " 13 - Set internet connection qualitly"
-  echo " 14 - DL AOSP distro/ Sport's Tree"
-  echo " u - Update Sport's Script"
+  echo "  1 - Options for CM9"
+  echo "  2 - Options for CM10"
+  echo "  3 - Options for AOKP JB"
+  echo "  4 - Options for AOKP ICS"
+  echo "  5 - Set Device"
+  echo "  6 - Set number of processors"
+  echo "  7 - Install Necessary packages"
+  echo "  8 - Set internet connection qualitly"
+  echo "  u - Update Sport's Script"
   echo "  x - Exit"
   echo
   echo 
@@ -34,20 +31,14 @@ do
   if [ "$?" != "1" ]
   then
     case $opt in
-      1) cd ~/ics; .  build/envsetup.sh; lunch cm_$DEVICE; make clobber; brunch $DEVICE -j$JOB > ~/ics/build-`date +%Y%m%d`.txt; cp ~/ics/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/ics/*.txt ~/Desktop; cd ~/scripts;;
-      2) cd ~/cm10; . build/envsetup.sh; make clobber; brunch $DEVICE -j$JOB > ~/cm10/build-`date +%Y%m%d`.txt; cp ~/cm10/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/cm10/*.txt ~/Desktop && cd ~/scripts;;
-      3) cd ~/AOKP; .  build/envsetup.sh; lunch aokp_$DEVICE; make clobber; brunch $DEVICE -j$JOB > ~/AOKP/build-`date +%Y%m%d`.txt; cp ~/AOKP/out/target/product/ruby/*.zip ~/Desktop; cp ~/AOKP/*.txt ~/Desktop && rm ~/AOKP/build.txt; cd ~/scripts;;
-      4) cd ~/ics; .  build/envsetup.sh; make clobber; cd ~/scripts;;
-      5) cd ~/cm10; .  build/envsetup.sh; make clobber; cd ~/scripts;;
-      6) cd ~/AOKP; .  build/envsetup.sh; make clobber; cd ~/scripts;;
-      7) cd ~/ics; repo sync -j$REPO; cd ~/scripts;;
-      8) cd ~/cm10; repo sync -j$REPO; cd ~/scripts;;
-      9) cd ~/AOKP; repo sync -j$REPO; cd ~/scripts;;
-      10) ~/scripts/device;;
-      11) ~/scripts/processor;;
-      12) mkdir -p ~/bin; curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo; sudo cp ~/bin/repo /usr/bin && sudo chmod a+x /usr/bin/repo; sudo apt-get update && sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc; sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner" && sudo apt-get update && sudo apt-get install sun-java6-jdk;;
-      13) ~/scripts/repo;;
-      14) ~/scripts/tree;;
+      1) ~/scripts/cm9;;
+      2) ~/scripts/cm10;;
+      3) ~/scripts/aokp_jb;;
+      4) ~/scripts/aokp_ics;;
+      5) ~/scripts/device;;
+      6) ~/scripts/processor;;
+      7) mkdir -p ~/bin; curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo; sudo cp ~/bin/repo /usr/bin && sudo chmod a+x /usr/bin/repo; sudo apt-get update && sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown libxml2-utils xsltproc; sudo add-apt-repository "deb http://archive.canonical.com/ lucid partner" && sudo apt-get update && sudo apt-get install sun-java6-jdk;;
+      8) ~/scripts/repo;;
       u) cd ~/scripts && git pull;;
       x) exit;;
     esac
