@@ -5,6 +5,9 @@ do
 
   clear
 
+  echo    Amount Of Processors = $JOB
+  echo    Network Strength = $REPO
+
   echo "  1 - Build CM9 for $DEVICE"
   echo "  2 - Clean CM9"
   echo "  3 - Update CM9 Source"

@@ -5,6 +5,9 @@ do
 
   clear
 
+  echo    Amount Of Processors = $JOB
+  echo    Network Strength = $REPO
+
   echo "  1 - Build AOKP JB for $DEVICE"
   echo "  2 - Clean AOKP JB"
   echo "  3 - Update AOKP JB Source"
@@ -23,9 +26,9 @@ do
       1) cd ~/AOKP; . build/envsetup.sh; brunch $DEVICE -j$JOB > ~/AOKP/build-`date +%Y%m%d`.txt; cp ~/AOKP/out/target/product/$DEVICE/*.zip ~/Desktop; cp ~/AOKP/*.txt ~/Desktop && cd ~/scripts;;
       2) cd ~/AOKP; .  build/envsetup.sh; make clobber; cd ~/scripts;;
       3) cd ~/AOKP; repo sync -j$REPO; cd ~/scripts;;
-      4) echo sorry does not exist..... yet;;
+      4) cd ~/AOKP/device && mkdir htc && cd htc; git clone git://github.com/Sportsstar89/android_device_htc_ruby.git -b aokp_jb ruby; cd ~/AOKP/vendor && mkdir htc && cd htc && git clone git://github.com/Sportsstar89/proprietary_vendor_htc_ruby.git -b jellybean ruby; cd ~/scripts;;
       5) cd ~/ && mkdir AOKP && cd ~/AOKP && repo init -u https://github.com/AOKP/platform_manifest.git -b jb && repo sync -j$REPO;;
-      6)  echo sorry does not exist..... yet;;
+      6) cd ~/AOKP/device/htc/ruby && git pull; cd ~/AOKP/vendor/htc/ruby && git pull; cd ~/scripts;;
       x) exit;;
     esac
   fi
