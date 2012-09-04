@@ -23,7 +23,6 @@ do
       3) export DEVICE=tf101;;
       4) export DEVICE=p930$;;
       x) ~/scripts/cm_script;;
-#      *) echo "Invalid option"; continue;;
     esac
   fi
 

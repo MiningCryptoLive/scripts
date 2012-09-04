@@ -1,0 +1,38 @@
+#!/bin/bash
+
+while :
+do
+
+  clear
+  
+  echo set number of cores
+  echo "  1 - 1"
+  echo "  2 - 2"
+  echo "  3 - 3"
+  echo "  4 - 4"
+  echo "  5 - 8"
+  echo "  6 - 12"
+  echo "  7 - 16"
+  echo "  8 - 32"
+  echo "  x - Go back"
+  echo
+  echo 
+  echo -n "Enter option: "
+  read opt
+  
+  if [ "$?" != "1" ]
+  then
+    case $opt in
+      1) export JOB=1;;
+      2) export JOB=2;;
+      3) export JOB=3;;
+      4) export JOB=4;;
+      5) export JOB=8;;
+      6) export JOB=12;;
+      7) export JOB=16;;
+      8) export JOB=32;;
+      x) ~/scripts/cm_script;;
+    esac
+  fi
+
+done
