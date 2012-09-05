@@ -9,6 +9,7 @@ do
   echo "  2 - Set device Shooter"
   echo "  3 - Set device TF101"
   echo "  4 - Set device P930"
+  echo "  5 - Set device Leo"
   echo "  x - Go back"
   echo
   echo 
@@ -22,6 +23,7 @@ do
       2) export DEVICE=shooter;;
       3) export DEVICE=tf101;;
       4) export DEVICE=p930$;;
+      5) export DEVICE=leo;;
       x) ~/scripts/cm_script;;
     esac
   fi
